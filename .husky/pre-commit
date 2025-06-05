@@ -1,0 +1,2 @@
+echo "Validando el código con ESLint"
+npm run lint
