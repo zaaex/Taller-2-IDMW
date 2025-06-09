@@ -1,26 +1,34 @@
 "use client";
-import "@fontsource/afacad";
-import { VscAccount } from "react-icons/vsc";
-import z from "zod";
+
+import { Button } from "@/components/ui/button";
 import {
-  Form,
   FormField,
   FormItem,
   FormLabel,
   FormControl,
   FormMessage,
+  Form,
 } from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { useForm } from "react-hook-form";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ApiBackend } from "@/clients/axios";
+import { VscAccount } from "react-icons/vsc";
 
 const formSchema = z.object({
   email: z
     .string()
-    .email({ message: "Ingrese un correo electrónico válido." })
-    .nonempty({ message: "Email es requerido." }),
-  password: z.string().nonempty({ message: "Contraseña es requerida." }),
+    .email({
+      message: "Ingrese un correo electrónico válido.",
+    })
+    .nonempty({
+      message: "Email es requerido.",
+    }),
+
+  password: z.string().nonempty({
+    message: "Contraseña es requerida.",
+  }),
 });
 
 export const LoginPage = () => {
@@ -34,8 +42,21 @@ export const LoginPage = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      console.log("Valores enviados:", values);
-    } catch (error) {}
+      console.log("Valores enviados de formulario:", values);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const data = await ApiBackend.post<any>("Auth/login", values);
+      // const user_: User = {
+      //     email: data.email,
+      //     lastName: data.lastName,
+      //     firtsName: data.firtsName,
+      //     token: data.token,
+      // }
+      console.log("Respuesta del servidor:", data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error("Error al enviar el formulario:", error);
+    }
+    // Aquí puedes manejar la lógica de inicio de sesión
   };
 
   return (
@@ -55,7 +76,9 @@ export const LoginPage = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className = "text-lg">Correo electrónico *</FormLabel>
+                  <FormLabel className="text-lg">
+                    Correo electrónico *
+                  </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="correo@example.com"
@@ -73,7 +96,7 @@ export const LoginPage = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className = "text-lg">Contraseña *</FormLabel>
+                  <FormLabel className="text-lg">Contraseña *</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
