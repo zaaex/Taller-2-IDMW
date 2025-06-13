@@ -23,7 +23,9 @@ export const AuthProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(authReducer, authInitialState);
 
   const auth = (user: User) => {
-    dispatch({ type: "auth", payload: { user } });
+    
+    dispatch({ type: "auth", payload: { user }});
+    
   };
   const logout = () => {
     localStorage.removeItem("token");

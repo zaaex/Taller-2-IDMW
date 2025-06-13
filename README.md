@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## 1. Nombre del Proyecto
 
-First, run the development server:
+**Plataforma E-Commerce BLACKCAT**
+
+Nathalia Olivarez  nathalia.olivarez@alumnos.ucn.cl   21.376.495-0
+Alexander Rivera   alexander.rivera01@alumnos.ucn.cl  21.354.394-6
+
+---
+
+## 2. Descripción del Proyecto
+
+Este proyecto corresponde al desarrollo de una plataforma de comercio electrónico para la empresa ficticia BLACKCAT, como parte del taller de la asignatura *Introducción al Desarrollo Web/Móvil*, construida con **Next.js** y forma parte de una arquitectura cliente-servidor.
+
+El cliente debe permitir a los usuarios:
+
+- Explorar el catálogo de productos con filtros personalizados.
+- Visualizar detalles de productos.
+- Registrarse e iniciar sesión.
+- Gestionar un carrito de compras y realizar pedidos (clientes registrados).
+- Acceder a un panel de administración (usuarios administradores).
+
+---
+
+## 3. Requisitos Previos
+
+Para ejecutar este proyecto necesitas tener instaladas las siguientes herramientas.
+
+- [Node.js](https://nodejs.org/) (versión 18.x recomendada)
+- [npm](https://www.npmjs.com/) (versión 9.x o superior)
+- [Git](https://git-scm.com/)
+- Backend API
+
+---
+
+## 4. Instrucciones de Instalación
+
+Sigue estos pasos para clonar el repositorio e instalar las dependencias del proyecto:
 
 ```bash
+# 1. Clona el repositorio
+git clone <https://github.com/zaaex/Taller-2-IDMW.git>
+
+# 2. Accede a la carpeta del proyecto
+cd FRONTEND
+
+# 3. Instala las dependencias
+npm install
+
+---
+
+## 5. Crear el archivo .env en la raíz de FRONTEND con el siguiente contenido:
+NEXT_PUBLIC_API_URL = "http://localhost:3000/api"  # Reemplaza con la URL de tu API
+
+---
+
+## 6. Ejecutar la Aplicación
+
+Para iniciar el entorno de desarrollo local:
+```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
+## 7. Enlace al Prototipo en Figma
+https://www.figma.com/design/uqdnKKii28HKLOtTL2x18r/Taller2Web?node-id=0-1&t=Y6YSIeECewqBqPSY-1
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 8. Backend
+Esta aplicación requiere que la API del curso de comercio electrónico esté ejecutándose. Puede encontrar el repositorio de backend aquí:
+https://github.com/FernandoChav/AyudantiaWebMovil.git
