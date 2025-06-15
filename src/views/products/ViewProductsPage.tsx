@@ -3,6 +3,7 @@ import { ProductCard } from "@/components/products/ProductCard";
 import { Product } from "@/interfaces/Product";
 import { useProductStore } from "@/stores/ProductStore";
 import { useEffect, useState } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -122,6 +123,40 @@ export default function ViewProductsPage() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
+      </div>
+
+      <div className="flex justify-center gap-10 py-4">
+        {/* Ordenar por precio */}
+        <div className="border rounded-xl px-6 py-4 w-[300px]">
+          <h2 className="text-center font-semibold mb-4">Ordenar por precio</h2>
+          <div className="flex items-center justify-around">
+            <label className="flex items-center gap-2">
+              <Checkbox id="precio-ascendente" />
+              <span className="text-sm font-medium">Ascendente</span>
+            </label>
+            <label className="flex items-center gap-2">
+              <Checkbox id="precio-descendente" />
+              <span className="text-sm font-medium">Descendente</span>
+            </label>
+          </div>
+        </div>
+
+        {/* Ordenar por alfabeto */}
+        <div className="border rounded-xl px-6 py-4 w-[300px]">
+          <h2 className="text-center font-semibold mb-4">
+            Ordenar por alfabeto
+          </h2>
+          <div className="flex items-center justify-around">
+            <label className="flex items-center gap-2">
+              <Checkbox id="az" />
+              <span className="text-sm font-medium">A - Z</span>
+            </label>
+            <label className="flex items-center gap-2">
+              <Checkbox id="za" />
+              <span className="text-sm font-medium">Z - A</span>
+            </label>
+          </div>
+        </div>
       </div>
 
       {/* Listado de productos */}
