@@ -109,6 +109,13 @@ export const Navbar = () => {
                 Compras
               </Link>
 
+              <Link
+                href="/carrito"
+                className="text-white hover:text-blue-200 text-sm font-medium transition-colors"
+              >
+                Carrito
+              </Link>
+
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center">
                   <VscAccount className="w-[95px] h-[95px] text-[#2599e7]" />
