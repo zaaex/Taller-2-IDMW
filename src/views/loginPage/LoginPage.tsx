@@ -19,6 +19,7 @@ import {useContext, useState } from "react";
 import { User } from "@/interfaces/User";
 import { ResponseAPI } from "@/interfaces/ResponseAPI";
 import { AuthContext } from "@/contexts/AuthContext";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z
@@ -146,6 +147,12 @@ export const LoginPage = () => {
             >
               INGRESAR
             </Button>
+            <p className="text-center text-sm text-black">
+              ¿No tienes una cuenta? {""}
+              <Link href="/register" className="text-[#1C3873] hover:underline">
+                Registrate
+              </Link>
+            </p>
           </form>
         </Form>
       </div>
