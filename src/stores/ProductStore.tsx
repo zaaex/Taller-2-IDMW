@@ -9,6 +9,7 @@ interface ProductState {
     filters: ProductFilters;
     fetchProducts: () => Promise<void>;
     setFilters: (filters: Partial<ProductFilters>) => void;
+    getProductById: (id: number) => Product | undefined;
 }
 
 export const useProductStore = create<ProductState>((set, get) => ({
@@ -34,4 +35,21 @@ export const useProductStore = create<ProductState>((set, get) => ({
     setFilters: (newFilters) => set((state) => ({
         filters: {...state.filters, ...newFilters},
     })),
+    getProductById: (id) => get().products.find((p) => p.id === id),
 }))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,8 @@
 "use client";
 import { ProductCard } from "@/components/products/ProductCard";
-import { Product } from "@/interfaces/Product";
+
 import { useProductStore } from "@/stores/ProductStore";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   NavigationMenu,
@@ -12,10 +12,11 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { useRouter } from "next/navigation";
 
 export default function ViewProductsPage() {
   const { products, loading, fetchProducts, filters } = useProductStore();
-  const [, setSelectedProduct] = useState<Product | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     fetchProducts();
@@ -165,7 +166,9 @@ export default function ViewProductsPage() {
           <ProductCard
             key={product.id}
             product={product}
-            onClick={() => setSelectedProduct(product)}
+            onClick={() => {
+              router.push(product.id!.toString());
+            }}
           />
         ))}
       </div>
