@@ -35,7 +35,7 @@ export const Navbar = () => {
             {/* Enlaces y botones de sesión */}
             <div className="flex items-center space-x-6">
               <Link
-                href="/catalog"
+                href="/"
                 className="text-white hover:text-blue-200 text-sm font-medium transition-colors"
               >
                 Catálogo
@@ -96,7 +96,7 @@ export const Navbar = () => {
             {/* Enlaces y botones de sesión */}
             <div className="flex items-center space-x-6">
               <Link
-                href="/catalog"
+                href="/"
                 className="text-white hover:text-blue-200 text-sm font-medium transition-colors"
               >
                 Catálogo
@@ -163,7 +163,7 @@ export const Navbar = () => {
             {/* Enlaces y botones de sesión */}
             <div className="flex items-center space-x-6">
               <Link
-                href="/catalog"
+                href="/"
                 className="text-white hover:text-blue-200 text-sm font-medium transition-colors"
               >
                 Usuarios
