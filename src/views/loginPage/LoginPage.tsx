@@ -15,7 +15,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ApiBackend } from "@/clients/axios";
 import { VscAccount } from "react-icons/vsc";
-import {useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { User } from "@/interfaces/User";
 import { ResponseAPI } from "@/interfaces/ResponseAPI";
 import { AuthContext } from "@/contexts/AuthContext";
@@ -47,7 +47,7 @@ export const LoginPage = () => {
 
   const [errors, setErrors] = useState<string | null>(null);
   const [errorBool, setErrorBool] = useState<boolean>(false);
-  const { auth, user} = useContext(AuthContext);
+  const { auth, user } = useContext(AuthContext);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -55,7 +55,7 @@ export const LoginPage = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { data } = await ApiBackend.post<ResponseAPI>("Auth/login", values);
 
-      if (data.success == false){
+      if (data.success == false) {
         console.error("Error en la respuesta del servidor: ", data.message);
         setErrors("Error en la respuesta del servidor: ");
         setErrorBool(true);
@@ -66,14 +66,13 @@ export const LoginPage = () => {
 
       const data_ = data.data;
       const user_: User = {
-          email: data_.email,
-          lastName: data_.lastName,
-          firtsName: data_.firtsName,
-          token: data_.token,
-      }
+        email: data_.email,
+        lastName: data_.lastName,
+        firtsName: data_.firtsName,
+        token: data_.token,
+      };
       auth(user_);
       console.log("Datos del usuario: ", user);
-
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -87,13 +86,15 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4 font-[Afacad]">
-      <div className="w-full max-w-md bg-transparent">
-        <h1 className="text-4xl font-bold text-center mb-6">Iniciar sesión</h1>
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4 py-8 font-[Afacad]">
+      <div className="w-full max-w-md bg-[#75BEF0] rounded-2xl shadow-xl px-8 py-10">
+        <h1 className="text-3xl md:text-4xl font-bold text-center text-black mb-6">
+          Iniciar sesión
+        </h1>
 
         {/* Ícono arriba */}
         <div className="flex justify-center mb-6">
-          <VscAccount className="w-[150px] h-[170px] text-[#2599E7]" />
+          <VscAccount className="w-24 h-24 md:w-36 md:h-36 text-[#2599E7]" />
         </div>
 
         <Form {...form}>
@@ -103,17 +104,17 @@ export const LoginPage = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg">
+                  <FormLabel className="text-black text-base md:text-lg">
                     Correo electrónico *
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="correo@example.com"
-                      className="rounded-md shadow-sm"
+                      className="rounded-xl bg-white h-10 px-4 text-base"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-600 text-xs font-medium" />
                 </FormItem>
               )}
             />
@@ -123,31 +124,33 @@ export const LoginPage = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg">Contraseña *</FormLabel>
+                  <FormLabel className="text-black text-base md:text-lg">
+                    Contraseña *
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="password"
                       placeholder="••••••"
-                      className="rounded-md shadow-sm"
+                      className="rounded-xl bg-white h-10 px-4 text-base"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-600 text-xs font-medium" />
                 </FormItem>
               )}
             />
             {errorBool && (
-              <div className="text-red-500 text-sm mt-2 p-2 bg-red-100 rounded">
+              <div className="text-red-500 text-sm mt-2 p-2 bg-red-100 rounded text-center">
                 {errors}
               </div>
             )}
             <Button
               type="submit"
-              className="w-full bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition"
+              className="w-full bg-[#2599E7] hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-lg shadow-md transition"
             >
               INGRESAR
             </Button>
-            <p className="text-center text-sm text-black">
+            <p className="text-center text-sm text-black mt-2">
               ¿No tienes una cuenta? {""}
               <Link href="/register" className="text-[#1C3873] hover:underline">
                 Registrate
