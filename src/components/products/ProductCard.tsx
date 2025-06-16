@@ -1,6 +1,6 @@
 import { Product } from "../../interfaces/Product";
 import Image from "next/image";
-import { Button } from "../ui/button";
+
 
 interface ProductCardProps {
   product: Product;
@@ -25,7 +25,6 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
       <div className="p-4">
         <h3 className="font-semibold text-lg"> {product.name}</h3>
         <p className="mt-2 text-black font-bold text-l">${product.price}</p>
-        <Button className="mt-4 w-full bg-[#1999EF]"> Ver detalle </Button>
       </div>
     </div>
   );
