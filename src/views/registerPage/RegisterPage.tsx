@@ -133,12 +133,12 @@ export const RegisterPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4 font-[Afacad]">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4 sm:px-6 lg:px-8 font-[Afacad]">
       <div className="w-full max-w-3xl bg-transparent">
-        <h1 className="text-4xl font-bold text-center text-black mb-6">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center text-black mb-4 sm:mb-6">
           Crear cuenta
         </h1>
-        <div className="w-full max-w-3xl bg-[#75BEF0] rounded-2xl p-10 shadow-xl text-base">
+        <div className="w-full bg-[#75BEF0] rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl text-sm sm:text-base">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -152,7 +152,7 @@ export const RegisterPage = () => {
                         <FormControl>
                           <Input
                             {...field}
-                            className="rounded-xl bg-white h-10 px-4 text-base"
+                            className="rounded-xl bg-white h-10 md:h-12 px-4 text-sm md:text-base"
                           />
                         </FormControl>
                         <FormMessage className="text-red-600 text-xs font-medium" />
@@ -171,7 +171,7 @@ export const RegisterPage = () => {
                         <FormControl>
                           <Input
                             {...field}
-                            className="rounded-xl bg-white h-10 px-4 text-base"
+                            className="rounded-xl bg-white h-10 md:h-12 px-4 text-sm md:text-base"
                           />
                         </FormControl>
                         <FormMessage className="text-red-600 text-xs font-medium" />
@@ -195,7 +195,7 @@ export const RegisterPage = () => {
                         <Input
                           {...field}
                           type="email"
-                          className="rounded-xl bg-white h-10 px-4 text-base"
+                          className="rounded-xl bg-white h-10 md:h-12 px-4 text-sm md:text-base"
                         />
                       </FormControl>
                       <FormMessage className="text-red-600 text-xs font-medium" />
@@ -227,7 +227,7 @@ export const RegisterPage = () => {
                             onChange={(e) =>
                               field.onChange(new Date(e.target.value))
                             }
-                            className="rounded-xl bg-white h-10 px-4 text-base"
+                            className="rounded-xl bg-white h-10 md:h-12 px-4 text-sm md:text-base"
                           />
                         </FormControl>
                         <FormMessage className="text-red-600 text-xs font-medium" />
@@ -249,7 +249,7 @@ export const RegisterPage = () => {
                           <Input
                             {...field}
                             type="tel"
-                            className="rounded-xl bg-white h-10 px-4 text-base"
+                            className="rounded-xl bg-white h-10 md:h-12 px-4 text-sm md:text-base"
                           />
                         </FormControl>
                         <FormMessage className="text-red-600 text-xs font-medium" />
@@ -272,7 +272,7 @@ export const RegisterPage = () => {
                           <Input
                             {...field}
                             type="password"
-                            className="rounded-xl bg-white h-10 px-4 text-base"
+                            className="rounded-xl bg-white h-10 md:h-12 px-4 text-sm md:text-base"
                           />
                         </FormControl>
                         <FormMessage className="text-red-600 text-xs font-medium" />
@@ -294,7 +294,7 @@ export const RegisterPage = () => {
                           <Input
                             {...field}
                             type="password"
-                            className="rounded-xl bg-white h-10 px-4 text-base"
+                            className="rounded-xl bg-white h-10 md:h-12 px-4 text-sm md:text-base"
                           />
                         </FormControl>
                         <FormMessage className="text-red-600 text-xs font-medium" />
@@ -313,7 +313,7 @@ export const RegisterPage = () => {
               <div className="flex justify-center">
                 <Button
                   type="submit"
-                  className="bg-[#0084ff] hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow-md"
+                  className="bg-[#2599E7] hover:bg-blue-700 text-black font-semibold py-2 px-6 rounded-lg shadow-md text-sm md:text-base"
                   disabled={form.formState.isSubmitting}
                 >
                   REGISTRARSE

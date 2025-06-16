@@ -1,61 +1,52 @@
 "use client";
-import { useContext } from "react";
+import { useContext} from "react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import { VscAccount } from "react-icons/vsc";
 import { AuthContext } from "@/contexts/AuthContext";
 import { Button } from "./ui/button";
+import { VscAccount } from "react-icons/vsc";
 
 export const Navbar = () => {
   const { user, status, logout } = useContext(AuthContext);
+  const isAdmin = user?.role === "Admin" || user?.isAdmin === true;
 
   if (status === "non-authenticated" || status === "checking") {
     return (
-      <nav className="shadow-lg" style={{ background: "#061754" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <nav className="shadow-lg bg-[#061754]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-col md:flex-row items-center md:justify-between space-y-4 md:space-y-0">
             {/* Logo */}
-            <div className="flex-shrink-0">
-              <div className="text-white text-xl font-bold tracking-wider">
-                BLACKCAT
-              </div>
+            <div className="text-white text-xl font-bold tracking-wider">
+              BLACKCAT
             </div>
 
             {/* Barra de búsqueda central */}
-            <div className="flex-1 max-w-lg mx-8">
-              <div className="relative">
-                <Input
-                  type="text"
-                  placeholder="Buscar"
-                  className="w-full pl-4 pr-12 py-2 bg-white rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                />
-              </div>
+            <div className="w-full md:max-w-lg">
+              <Input
+                type="text"
+                placeholder="Buscar"
+                className="w-full pl-4 pr-12 py-2 bg-white rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              />
             </div>
 
             {/* Enlaces y botones de sesión */}
-            <div className="flex items-center space-x-6">
-              <Link
-                href="/"
-                className="text-white hover:text-blue-200 text-sm font-medium transition-colors"
-              >
+            <div className="flex flex-col md:flex-row items-center md:space-x-6 text-sm text-white space-y-2 md:space-y-0">
+              <Link href="/" className="text-white hover:text-blue-200">
                 Catálogo
               </Link>
 
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center">
-                  <VscAccount className="w-[95px] h-[95px] text-[#2599e7]" />
-                </div>
-
-                <div className="flex flex-col">
+                <VscAccount className="w-6 h-6 text-[#2599e7]" />
+                <div className="flex flex-col text-center md:text-left">
                   <Link
                     href="/login"
-                    className="text-white hover:text-blue-200 text-sm font-medium leading-tight transition-colors"
+                    className="text-white hover:text-blue-200"
                   >
                     Iniciar sesión
                   </Link>
                   <Link
                     href="/register"
-                    className="text-blue-300 hover:text-blue-200 text-sm leading-tight transition-colors"
+                    className="text-blue-300 hover:text-blue-200"
                   >
                     Registrarse
                   </Link>
@@ -68,64 +59,43 @@ export const Navbar = () => {
     );
   }
 
-  const isAdmin = user?.role === "Admin" || user?.isAdmin === true;
-
   if (status === "authenticated" && !isAdmin) {
     return (
-      <nav className="shadow-lg" style={{ background: "#061754" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <nav className="shadow-lg bg-[#061754]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-col md:flex-row items-center md:justify-between space-y-4 md:space-y-0">
             {/* Logo */}
-            <div className="flex-shrink-0">
-              <div className="text-white text-xl font-bold tracking-wider">
-                BLACKCAT
-              </div>
+            <div className="text-white text-xl font-bold tracking-wider">
+              BLACKCAT
             </div>
 
             {/* Barra de búsqueda central */}
-            <div className="flex-1 max-w-lg mx-8">
-              <div className="relative">
-                <Input
-                  type="text"
-                  placeholder="Buscar"
-                  className="w-full pl-4 pr-12 py-2 bg-white rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                />
-              </div>
+            <div className="w-full md:max-w-lg">
+              <Input
+                type="text"
+                placeholder="Buscar"
+                className="w-full pl-4 pr-12 py-2 bg-white rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              />
             </div>
 
             {/* Enlaces y botones de sesión */}
-            <div className="flex items-center space-x-6">
-              <Link
-                href="/"
-                className="text-white hover:text-blue-200 text-sm font-medium transition-colors"
-              >
+            <div className="flex flex-col md:flex-row items-center md:space-x-6 space-y-2 md:space-y-0 text-sm text-white">
+              <Link href="/" className="text-white hover:text-blue-200">
                 Catálogo
               </Link>
 
-              <Link
-                href="/compras"
-                className="text-white hover:text-blue-200 text-sm font-medium transition-colors"
-              >
+              <Link href="/compras" className="text-white hover:text-blue-200">
                 Compras
               </Link>
 
-              <Link
-                href="/carrito"
-                className="text-white hover:text-blue-200 text-sm font-medium transition-colors"
-              >
+              <Link href="/carrito" className="text-white hover:text-blue-200">
                 Carrito
               </Link>
 
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center">
-                  <VscAccount className="w-[95px] h-[95px] text-[#2599e7]" />
-                </div>
-
-                <div className="flex flex-col">
-                  <Link
-                    href="/login"
-                    className="text-white hover:text-blue-200 text-sm font-medium leading-tight transition-colors"
-                  >
+                <VscAccount className="w-6 h-6 text-[#2599e7]" />
+                <div>
+                  <Link href="/login" className="hover:text-blue-200">
                     Mi perfil
                   </Link>
                 </div>
@@ -139,56 +109,40 @@ export const Navbar = () => {
 
   if (status === "authenticated" && isAdmin) {
     return (
-      <nav className="shadow-lg" style={{ background: "#061754" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <nav className="shadow-lg bg-[#061754]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-col md:flex-row items-center md:justify-between space-y-4 md:space-y-0">
             {/* Logo */}
-            <div className="flex-shrink-0">
-              <div className="text-white text-xl font-bold tracking-wider">
-                BLACKCAT
-              </div>
+            <div className="text-white text-xl font-bold tracking-wider">
+              BLACKCAT
             </div>
 
             {/* Barra de búsqueda central */}
-            <div className="flex-1 max-w-lg mx-8">
-              <div className="relative">
-                <Input
-                  type="text"
-                  placeholder="Buscar"
-                  className="w-full pl-4 pr-12 py-2 bg-white rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                />
-              </div>
+            <div className="w-full md:max-w-lg">
+              <Input
+                type="text"
+                placeholder="Buscar"
+                className="w-full pl-4 pr-12 py-2 bg-white rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              />
             </div>
 
             {/* Enlaces y botones de sesión */}
-            <div className="flex items-center space-x-6">
-              <Link
-                href="/"
-                className="text-white hover:text-blue-200 text-sm font-medium transition-colors"
-              >
+            <div className="flex flex-col md:flex-row items-center md:space-x-6 space-y-2 md:space-y-0 text-sm text-white">
+              <Link href="/" className="text-white hover:text-blue-200">
                 Usuarios
               </Link>
 
-              <Link
-                href="/compras"
-                className="text-white hover:text-blue-200 text-sm font-medium transition-colors"
-              >
+              <Link href="/compras" className="text-white hover:text-blue-200">
                 Productos
               </Link>
-
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center">
-                  <VscAccount className="w-[95px] h-[95px] text-[#2599e7]" />
-                </div>
-
-                <div className="flex flex-col">
-                  <Button
-                    onClick={logout}
-                    className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
-                  >
-                    Cerrar Sesión
-                  </Button>
-                </div>
+                <VscAccount className="w-6 h-6 text-[#2599e7]" />
+                <Button
+                  onClick={logout}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                >
+                  Cerrar Sesión
+                </Button>
               </div>
             </div>
           </div>

@@ -16,10 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>
+      <body className="bg-gray-50 text-gray-900">
         <Providers>
           <Navbar />
-          <main className="min-h-screen bg-gray-50">{children}</main>
+          <main className="min-h-screen px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20 max-w-screen-xl mx-auto py-6">
+            {children}
+          </main>
           <Toaster richColors position="top-right" />
         </Providers>
       </body>
