@@ -25,7 +25,7 @@ export default function ProductDetailRoute() {
     }
   }, [product, fetchProducts]);
 
-  if (!product) return <p className="p-4 text-center">Cargando…</p>;
+  if (!product) return <p className="p-4 text-center">Esta página no existe</p>;
 
   return (
     <div className="grid md:grid-cols-2 gap-6 md:gap-8 p-4 md:p-6 font-[Afacad]">

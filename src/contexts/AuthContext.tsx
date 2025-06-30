@@ -2,7 +2,8 @@
 
 import { User } from "@/interfaces/User";
 import { authReducer, AuthState } from "./AuthReducer";
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
+import { decodeJWT } from "@/helpers/decodeJWT";
 
 type AuthContextProps = {
   user: User | null;
@@ -22,15 +23,23 @@ export const AuthContext = createContext({} as AuthContextProps);
 export const AuthProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(authReducer, authInitialState);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      dispatch({ type: "non-authenticated" });
+    } else {
+      dispatch({ type: "auth", payload: { user: decodeJWT(token) } });
+    }
+  }, []);
+
   const auth = (user: User) => {
-    
-    dispatch({ type: "auth", payload: { user }});
-    
+    dispatch({ type: "auth", payload: { user } });
   };
   const logout = () => {
     localStorage.removeItem("token");
     dispatch({ type: "logout" });
   };
+
   const updateUser = (user: User) => {
     dispatch({ type: "updateUser", payload: { user } });
   };
