@@ -13,13 +13,12 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ApiBackend } from "@/clients/axios";
 import { VscAccount } from "react-icons/vsc";
 import { useContext, useState } from "react";
 import { User } from "@/interfaces/User";
-import { ResponseAPI } from "@/interfaces/ResponseAPI";
 import { AuthContext } from "@/contexts/AuthContext";
 import Link from "next/link";
+import { AuthService } from "@/services/AuthServices";
 
 const formSchema = z.object({
   email: z
@@ -53,7 +52,7 @@ export const LoginPage = () => {
     try {
       console.log("Valores enviados de formulario:", values);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const { data } = await ApiBackend.post<ResponseAPI>("Auth/login", values);
+      const data = await AuthService.login(values);
 
       if (data.success == false) {
         console.error("Error en la respuesta del servidor: ", data.message);
