@@ -1,15 +1,15 @@
-import { User } from "@/interfaces/User";
+import { Auth } from "@/interfaces/Auth";
 
 export interface AuthState {
-  user: User | null;
+  auth: Auth | null;
   status: "authenticated" | "non-authenticated" | "checking";
 }
 
 export type AuthAction =
-  | { type: "auth"; payload: { user: User } }
+  | { type: "auth"; payload: { auth: Auth } }
   | { type: "logout" }
   | { type: "non-authenticated" }
-  | { type: "updateUser"; payload: { user: User } };
+  | { type: "updateAuth"; payload: { auth: Auth } };
 
 export const authReducer = (
   state: AuthState,
@@ -19,28 +19,28 @@ export const authReducer = (
     case "auth":
       return {
         ...state,
-        user: action.payload.user,
+        auth: action.payload.auth,
         status: "authenticated",
       };
     case "logout":
       return {
         ...state,
-        user: null,
+        auth: null,
         status: "non-authenticated",
       };
 
     case "non-authenticated":
       return {
         ...state,
-        user: null,
+        auth: null,
         status: "non-authenticated",
       };
-    case "updateUser":
+    case "updateAuth":
       return {
         ...state,
         status: "authenticated",
-        user: {
-          ...action.payload.user,
+        auth: {
+          ...action.payload.auth,
         },
       };
 
