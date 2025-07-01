@@ -13,6 +13,5 @@ export interface User {
   lastAccess?: Date;
   isActive?: boolean;
   token: string;
-  role?: "Admin" | "User";
-  isAdmin?: boolean
+  role?: string;
 }

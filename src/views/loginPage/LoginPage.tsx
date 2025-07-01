@@ -14,11 +14,13 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VscAccount } from "react-icons/vsc";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { User } from "@/interfaces/User";
-import { AuthContext } from "@/contexts/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import { AuthService } from "@/services/AuthServices";
+import { decodeJWT } from "@/helpers/decodeJWT";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z
@@ -46,13 +48,16 @@ export const LoginPage = () => {
 
   const [errors, setErrors] = useState<string | null>(null);
   const [errorBool, setErrorBool] = useState<boolean>(false);
-  const { auth, user } = useContext(AuthContext);
+  const { auth } = useAuth();
+  const router = useRouter();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       console.log("Valores enviados de formulario:", values);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const data = await AuthService.login(values);
+
+      console.log("Respuesta completa del authService: ", data);
 
       if (data.success == false) {
         console.error("Error en la respuesta del servidor: ", data.message);
@@ -64,14 +69,31 @@ export const LoginPage = () => {
       setErrorBool(false);
 
       const data_ = data.data;
+
+      const payload = decodeJWT(data_.token);
+      if (!payload) {
+        console.error("Error al decodificar el token:", data_.token);
+        setErrors("Error al decodificar el token.");
+        setErrorBool(true);
+        return;
+      }
+
       const user_: User = {
         email: data_.email,
         lastName: data_.lastName,
         firtsName: data_.firtsName,
         token: data_.token,
+        role: payload.role,
       };
+
+      localStorage.setItem("token", data_.token);
       auth(user_);
-      console.log("Datos del usuario: ", user);
+
+      if (payload.role === "Admin") {
+        router.push("/admin");
+      } else if (payload.role === "User") {
+        router.push("/client");
+      }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -81,7 +103,6 @@ export const LoginPage = () => {
       setErrors(errorCatch);
       setErrorBool(true);
     }
-    // Aquí puedes manejar la lógica de inicio de sesión
   };
 
   return (
