@@ -1,19 +1,28 @@
 "use client";
-import { useAuth } from "@/hooks/useAuth";
-import { LoginPage } from "@/views/loginPage/LoginPage";
-import { useRouter } from "next/navigation";
 
-export default function Login() {
-  const { user, status } = useAuth();
+import { AuthContext } from "@/contexts/AuthContext";
+import { LoginView } from "@/views/login-view/LoginView";
+import { LoginViewSkeleton } from "@/views/login-view/LoginViewSkeleton";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+
+export default function LoginPage() {
   const router = useRouter();
 
+  // 1. Obtener el estado de autenticación del contexto
+  const { status } = useContext(AuthContext);
+
+  // 2. Si esta cargando, mostrar un skeleton
   if (status === "checking") {
-    return <div>Cargando...</div>;
+    return <LoginViewSkeleton />;
   }
 
-  if (user) {
-    router.push("/");
+  // 3. Si estoy autenticado, redirigir a la página de inicio
+  if (status === "authenticated") {
+    router.replace("/");
+    return null;
   }
 
-  return <LoginPage />;
+  // 4. Si no estoy autenticado, mostrar el formulario de inicio de sesión
+  return <LoginView />;
 }

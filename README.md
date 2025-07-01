@@ -49,8 +49,7 @@ npm install
 
 ---
 
-## 5. Crear el archivo .env en la raíz de FRONTEND con el siguiente contenido:
-NEXT_PUBLIC_API_URL = "http://localhost:3000/api"  # Reemplaza con la URL de tu API
+
 
 ---
 
@@ -67,3 +66,6 @@ https://www.figma.com/design/uqdnKKii28HKLOtTL2x18r/Taller2Web?node-id=0-1&t=Y6Y
 ## 8. Backend
 Esta aplicación requiere que la API del curso de comercio electrónico esté ejecutándose. Puede encontrar el repositorio de backend aquí:
 https://github.com/FernandoChav/AyudantiaWebMovil.git
+
+## 5. Crear el archivo .env en la raíz de FRONTEND con el siguiente contenido:
+NEXT_PUBLIC_API_URL = "http://localhost:3000/api"  # Reemplaza con la URL de tu API

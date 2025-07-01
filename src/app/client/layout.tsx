@@ -8,7 +8,7 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, status } = useAuth();
+  const { auth: user, status } = useAuth();
   const router = useRouter();
 
   if (status === "checking") {

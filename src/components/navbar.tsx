@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 import { VscAccount } from "react-icons/vsc";
 
 export const Navbar = () => {
-  const { user, status, logout } = useContext(AuthContext);
+  const { auth: user, status, logout } = useContext(AuthContext);
   const userRole = user?.role;
   const isAdmin = userRole === "Admin";
   const isUser = userRole === "User";

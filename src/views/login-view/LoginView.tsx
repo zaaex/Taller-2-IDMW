@@ -10,100 +10,12 @@ import {
   Form,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { VscAccount } from "react-icons/vsc";
-import { useState } from "react";
-import { User } from "@/interfaces/User";
-import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
-import { AuthService } from "@/services/AuthServices";
-import { decodeJWT } from "@/helpers/decodeJWT";
-import { useRouter } from "next/navigation";
+import { useLogin } from "@/hooks/useLogin";
 
-const formSchema = z.object({
-  email: z
-    .string()
-    .email({
-      message: "Ingrese un correo electrónico válido.",
-    })
-    .nonempty({
-      message: "Email es requerido.",
-    }),
-
-  password: z.string().nonempty({
-    message: "Contraseña es requerida.",
-  }),
-});
-
-export const LoginPage = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-
-  const [errors, setErrors] = useState<string | null>(null);
-  const [errorBool, setErrorBool] = useState<boolean>(false);
-  const { auth } = useAuth();
-  const router = useRouter();
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      console.log("Valores enviados de formulario:", values);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const data = await AuthService.login(values);
-
-      console.log("Respuesta completa del authService: ", data);
-
-      if (data.success == false) {
-        console.error("Error en la respuesta del servidor: ", data.message);
-        setErrors("Error en la respuesta del servidor: ");
-        setErrorBool(true);
-        return;
-      }
-      setErrors(null);
-      setErrorBool(false);
-
-      const data_ = data.data;
-
-      const payload = decodeJWT(data_.token);
-      if (!payload) {
-        console.error("Error al decodificar el token:", data_.token);
-        setErrors("Error al decodificar el token.");
-        setErrorBool(true);
-        return;
-      }
-
-      const user_: User = {
-        email: data_.email,
-        lastName: data_.lastName,
-        firtsName: data_.firtsName,
-        token: data_.token,
-        role: payload.role,
-      };
-
-      localStorage.setItem("token", data_.token);
-      auth(user_);
-
-      if (payload.role === "Admin") {
-        router.push("/admin");
-      } else if (payload.role === "User") {
-        router.push("/client");
-      }
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      const errorCatch = error.response.data.message;
-      console.error("Error al enviar el formulario:", errorCatch);
-
-      setErrors(errorCatch);
-      setErrorBool(true);
-    }
-  };
+export const LoginView = () => {
+  const { form, onSubmit, error } = useLogin();
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4 py-8 font-[Afacad]">
@@ -159,9 +71,9 @@ export const LoginPage = () => {
                 </FormItem>
               )}
             />
-            {errorBool && (
+            {error !== null && (
               <div className="text-red-500 text-sm mt-2 p-2 bg-red-100 rounded text-center">
-                {errors}
+                {error}
               </div>
             )}
             <Button
