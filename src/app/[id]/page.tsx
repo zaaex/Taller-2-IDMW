@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
+import { useAuth } from "@/hooks/useAuth";
+import { LoginDialog } from "@/components/products/LoginDialog";
+import { useCartStore } from "@/stores/CartStore";
 
 export default function ProductDetailRoute() {
   const router = useRouter();
@@ -18,6 +21,9 @@ export default function ProductDetailRoute() {
 
   const fetchProducts = useProductStore((state) => state.fetchProducts);
   const [quantity, setQuantity] = useState(1);
+  const [showDialog, setShowDialog] = useState(false);
+  const { auth: user } = useAuth();
+  const { addToCart } = useCartStore();
 
   useEffect(() => {
     if (!product) {
@@ -25,7 +31,18 @@ export default function ProductDetailRoute() {
     }
   }, [product, fetchProducts]);
 
-  if (!product) return <p className="p-4 text-center">Cargando…</p>;
+  if (!product) return <p className="p-4 text-center">Esta página no existe</p>;
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!user) {
+      setShowDialog(true);
+      return;
+    }
+
+    addToCart(product.id, 1);
+    alert("Producto agregado al carrito exitosamente.");
+  };
 
   return (
     <div className="grid md:grid-cols-2 gap-6 md:gap-8 p-4 md:p-6 font-[Afacad]">
@@ -81,13 +98,23 @@ export default function ProductDetailRoute() {
           </div>
 
           {/* Botones de acción */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <Button
-              className="w-full sm:w-auto bg-[#1999EF] text-black text-lg md:text-xl px-6 py-4 rounded-xl"
-              onClick={() => router.push("/login")}
-            >
-              Añadir al carrito
-            </Button>
+
+          <>
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <Button
+                className="w-full sm:w-auto bg-[#1999EF] text-black text-lg md:text-xl px-6 py-4 rounded-xl"
+                onClick={handleAddToCart}
+              >
+                Añadir al carrito
+              </Button>
+            </div>
+            <LoginDialog
+              open={showDialog}
+              onClose={() => setShowDialog(false)}
+            />
+          </>
+
+          <div>
             <Button
               className="w-full sm:w-auto bg-[#8CCCF7] text-lg md:text-xl px-6 py-4 rounded-xl"
               variant="secondary"
