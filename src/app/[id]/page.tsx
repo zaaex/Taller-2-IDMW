@@ -10,6 +10,7 @@ import Image from "next/image";
 import { useAuth } from "@/hooks/useAuth";
 import { LoginDialog } from "@/components/products/LoginDialog";
 import { useCartStore } from "@/stores/CartStore";
+import { formatPrice } from "@/utils/formatPrice";
 
 export default function ProductDetailRoute() {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function ProductDetailRoute() {
       return;
     }
 
-    addToCart(product.id, 1);
+    addToCart(product.id, quantity);
     alert("Producto agregado al carrito exitosamente.");
   };
 
@@ -65,7 +66,7 @@ export default function ProductDetailRoute() {
           </h1>
           <hr className="my-4" />
           <p className="text-2xl md:text-4xl font-semibold mb-4">
-            ${product.price.toLocaleString()}
+            {formatPrice(product.price)}
           </p>
           <p className="mb-6 text-lg md:text-2xl font-medium text-gray-700">
             Stock disponible: {product.stock ?? 0} unidades

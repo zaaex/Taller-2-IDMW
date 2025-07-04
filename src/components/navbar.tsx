@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { AuthContext } from "@/contexts/AuthContext";
 import { Button } from "./ui/button";
 import { VscAccount } from "react-icons/vsc";
-import { useCartStore } from "@/stores/CartStore";
 
 export const Navbar = () => {
   const { auth: user, status, logout } = useContext(AuthContext);
