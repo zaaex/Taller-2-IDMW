@@ -1,3 +1,4 @@
+import { formatPrice } from "@/utils/formatPrice";
 import { Product } from "../../interfaces/Product";
 import Image from "next/image";
 
@@ -24,7 +25,7 @@ export const ProductCard = ({ product, onClick }: ProductCardProps) => {
       <div className="p-3 sm:p-4">
         <h3 className="font-semibold text-base sm:text-lg"> {product.name}</h3>
         <p className="mt-1 sm:mt-2 text-black font-bold text-sm sm:text-base">
-          ${product.price}
+          {formatPrice(product.price)}
         </p>
       </div>
     </div>

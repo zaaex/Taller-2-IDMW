@@ -2,7 +2,7 @@
 import { AuthContext } from "@/contexts/AuthContext";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
-import { CartPage } from "@/views/cartPage/cartPage";
+import { CartPage } from "@/views/cartPage/CartPage";
 
 export default function Cart() {
   const { status } = useContext(AuthContext);
