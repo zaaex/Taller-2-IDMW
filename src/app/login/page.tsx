@@ -4,7 +4,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { LoginView } from "@/views/login-view/LoginView";
 import { LoginViewSkeleton } from "@/views/login-view/LoginViewSkeleton";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -17,11 +17,12 @@ export default function LoginPage() {
     return <LoginViewSkeleton />;
   }
 
-  // 3. Si estoy autenticado, redirigir a la página de inicio
-  if (status === "authenticated") {
-    router.replace("/");
-    return null;
-  }
+  useEffect(() => {
+    if (status === "authenticated") {
+      // 3. Si estoy autenticado, redirigir a la página de inicio
+      router.replace("/");
+    }
+  }, [status, router]);
 
   // 4. Si no estoy autenticado, mostrar el formulario de inicio de sesión
   return <LoginView />;
