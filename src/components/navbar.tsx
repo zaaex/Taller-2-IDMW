@@ -8,9 +8,11 @@ import { VscAccount } from "react-icons/vsc";
 
 export const Navbar = () => {
   const { auth: user, status, logout } = useContext(AuthContext);
+  //const { items: cart } = useCartStore();
   const userRole = user?.role;
   const isAdmin = userRole === "Admin";
   const isUser = userRole === "User";
+
 
   if (status === "checking") {
     return (
@@ -118,23 +120,25 @@ export const Navbar = () => {
               </Link>
 
               <Link
-                href="/client/compras"
+                href="/client/shopping"
                 className="text-white hover:text-blue-200"
               >
                 Compras
               </Link>
 
               <Link
-                href="/client/carrito"
-                className="text-white hover:text-blue-200"
-              >
+                href="/client/cart"
+                className="text-white hover:text-blue-200 transition-all">
                 Carrito
               </Link>
 
               <div className="flex items-center space-x-2">
                 <VscAccount className="w-6 h-6 text-[#2599e7]" />
                 <div>
-                  <Link href="/login" className="hover:text-blue-200">
+                  <Link
+                    href="/client/profile"
+                    className="hover:text-blue-200 transition-all"
+                  >
                     Mi perfil
                   </Link>
                 </div>

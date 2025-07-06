@@ -4,3 +4,4 @@ export interface Auth {
   name: string;
   role: string;
 }
+
