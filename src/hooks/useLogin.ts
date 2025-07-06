@@ -44,7 +44,14 @@ export const useLogin = () => {
 
   // Form submission handler
   const onSubmit = async (values: LoginForm) => {
-    const data: ResponseAPI = await AuthService.login(values);
+    let data: ResponseAPI | null = null;
+
+    try {
+      data = await AuthService.login(values);
+    } catch {
+      setError("Credenciales inválidas");
+      return;
+    }
 
     if (!data) {
       setError("Intente nuevamente");

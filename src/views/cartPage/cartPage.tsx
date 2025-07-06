@@ -1,7 +1,7 @@
 "use client";
 
 import { useCartStore } from "@/stores/CartStore";
-import { CartItem } from "@/interfaces/Product";
+import { CartItem } from "@/interfaces/CartItem";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Circle, TrashIcon } from "lucide-react";
@@ -50,7 +50,7 @@ export const CartPage = () => {
             {/* Paso 3 */}
             <div className="flex flex-col items-center">
               <div className="relative">
-                <Circle className="w-12 h-12 text-[#E6F2FB] fill-[#E6F2FB]" />
+                <Circle className="w-12 h-12 text-[#BEE1F8] fill-[#BEE1F8]" />
                 <span className="absolute inset-0 flex items-center justify-center text-xl font-bold text-black">
                   3
                 </span>
@@ -136,7 +136,7 @@ export const CartPage = () => {
       </div>
 
       {/* Resumen (columna derecha) */}
-      <div className="w-full lg:w-96 bg-[#75BEF0] rounded-2xl shadow-md p-0 h-fit border-spacing-0.5 border-black">
+      <div className="w-full lg:w-96 bg-[#75BEF0] rounded-2xl shadow-md h-fit border-spacing-0.5 border-black m4">
         <div className="rounded-t 2xl bg-[#38A8F7] text-black text-xl font-bold text-center py-3 border-1 border-black">
           Resumen de tu compra
         </div>
@@ -161,14 +161,16 @@ export const CartPage = () => {
           </table>
         </div>
 
-        <hr className="my-2 mx-2" />
-        <div className="flex justify-between font-semibold text-lg">
-          <span className="mx-4">Subtotal</span>
-          <span className="mx-4">{formatPrice(totalPrice)}</span>
-        </div>
-        <div className="flex justify-between font-bold text-xl mt-2">
-          <span className="mx-4">Total</span>
-          <span className="mx-4">{formatPrice(totalPrice)}</span>
+        <hr className="my-4 mx-2 border-black" />
+        <div className="px-4 py-4">
+          <div className="flex justify-between font-semibold text-lg mb-3">
+            <span className="mx-4">Subtotal</span>
+            <span className="mx-4">{formatPrice(totalPrice)}</span>
+          </div>
+          <div className="flex justify-between font-bold text-xl mt-2">
+            <span className="mx-4">Total</span>
+            <span className="mx-4">{formatPrice(totalPrice)}</span>
+          </div>
         </div>
       </div>
     </div>
