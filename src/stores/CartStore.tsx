@@ -1,4 +1,4 @@
-import { CartItem } from "@/interfaces/Product";
+import { CartItem } from "@/interfaces/CartItem";
 import { CartService } from "@/services/CartServices";
 import { create } from "zustand";
 
