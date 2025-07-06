@@ -3,6 +3,7 @@ import { ProductCard } from "@/components/products/ProductCard";
 
 import { useProductStore } from "@/stores/ProductStore";
 import { useEffect } from "react";
+import { useFilters } from "@/hooks/useFilters";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   NavigationMenu,
@@ -17,6 +18,7 @@ import { useRouter } from "next/navigation";
 export default function ViewProductsPage() {
   const { products, loading, fetchProducts, filters } = useProductStore();
   const router = useRouter();
+  const { handleSort, handleCategoryFilter, handleBrandFilter } = useFilters();
 
   useEffect(() => {
     fetchProducts();
@@ -50,15 +52,16 @@ export default function ViewProductsPage() {
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="grid gap-3 p-4 w-[200px]">
-                  <NavigationMenuLink className="block select-none rounded-md p-3 hover:bg-accent hover:text-accent-foreground">
-                    Electrónicos
-                  </NavigationMenuLink>
-                  <NavigationMenuLink className="block select-none rounded-md p-3 hover:bg-accent hover:text-accent-foreground">
-                    Ropa
-                  </NavigationMenuLink>
-                  <NavigationMenuLink className="block select-none rounded-md p-3 hover:bg-accent hover:text-accent-foreground">
-                    Hogar
-                  </NavigationMenuLink>
+                  <select
+                    className="w-full rounded-md p-2 border border-gray-300"
+                    onChange={handleCategoryFilter}
+                    value={filters.categories || ""}
+                  >
+                    <option value="">Todas</option>
+                    <option value="Electrónicos">Electrónicos</option>
+                    <option value="Ropa">Ropa</option>
+                    <option value="Hogar">Hogar</option>
+                  </select>
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
@@ -107,18 +110,17 @@ export default function ViewProductsPage() {
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="grid gap-3 p-4 w-[200px]">
-                  <NavigationMenuLink className="block select-none rounded-md p-3 hover:bg-accent hover:text-accent-foreground">
-                    Apple
-                  </NavigationMenuLink>
-                  <NavigationMenuLink className="block select-none rounded-md p-3 hover:bg-accent hover:text-accent-foreground">
-                    Samsung
-                  </NavigationMenuLink>
-                  <NavigationMenuLink className="block select-none rounded-md p-3 hover:bg-accent hover:text-accent-foreground">
-                    Sony
-                  </NavigationMenuLink>
-                  <NavigationMenuLink className="block select-none rounded-md p-3 hover:bg-accent hover:text-accent-foreground">
-                    Nike
-                  </NavigationMenuLink>
+                  <select
+                    className="w-full rounded-md p-2 border border-gray-300"
+                    onChange={handleBrandFilter}
+                    value={filters.brands || ""}
+                  >
+                    <option value="">Todas</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Samsung">Samsung</option>
+                    <option value="Sony">Sony</option>
+                    <option value="Nike">Nike</option>
+                  </select>
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
@@ -130,13 +132,25 @@ export default function ViewProductsPage() {
         {/* Ordenar por precio */}
         <div className="border rounded-xl px-6 py-4 w-full sm:w-[300px]">
           <h2 className="text-center font-semibold mb-4">Ordenar por precio</h2>
-          <div className="fflex justify-around">
+          <div className="flex justify-around">
             <label className="flex items-center gap-2">
-              <Checkbox id="precio-ascendente" />
+              <input
+                type="checkbox"
+                name="sortPrice"
+                value="price"
+                checked={filters.orderBy === "price"}
+                onChange={() => handleSort("price")}
+              />
               <span className="text-sm font-medium">Ascendente</span>
             </label>
             <label className="flex items-center gap-2">
-              <Checkbox id="precio-descendente" />
+              <input
+                type="checkbox"
+                name="sortPrice"
+                value="priceDesc"
+                checked={filters.orderBy === "priceDesc"}
+                onChange={() => handleSort("priceDesc")}
+              />
               <span className="text-sm font-medium">Descendente</span>
             </label>
           </div>

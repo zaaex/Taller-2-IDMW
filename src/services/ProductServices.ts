@@ -4,12 +4,15 @@ import { ResponseAPI } from "@/interfaces/ResponseAPI";
 export interface ProductFilters {
   pageNumber: number;
   pageSize: number;
+  categories?: string;
+  brands?: string;
+  orderBy?: "price" | "priceDesc";
 }
 
 export const ProductServices = {
   async fetchProducts(filters: ProductFilters) {
     const { data } = await ApiBackend.get<ResponseAPI>("Product", {
-      params: filters,
+      params: { ...filters }
     });
 
     if (!data.success) {
