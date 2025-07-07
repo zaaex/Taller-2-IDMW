@@ -13,7 +13,6 @@ export const Navbar = () => {
   const isAdmin = userRole === "Admin";
   const isUser = userRole === "User";
 
-
   if (status === "checking") {
     return (
       <nav className="shadow-lg bg-[#061754]">
@@ -128,7 +127,8 @@ export const Navbar = () => {
 
               <Link
                 href="/client/cart"
-                className="text-white hover:text-blue-200 transition-all">
+                className="text-white hover:text-blue-200 transition-all"
+              >
                 Carrito
               </Link>
 
@@ -139,7 +139,7 @@ export const Navbar = () => {
                     href="/client/profile"
                     className="hover:text-blue-200 transition-all"
                   >
-                    Mi perfil
+                    Perfil
                   </Link>
                 </div>
               </div>

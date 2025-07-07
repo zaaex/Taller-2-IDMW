@@ -2,9 +2,9 @@
 import { AuthContext } from "@/contexts/AuthContext";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
-import { CartPage } from "@/views/cartPage/cartPage";
+import ProfilePage from "@/views/profilePage/ProfilePage";
 
-export default function Cart() {
+export default function Profile() {
   const { status } = useContext(AuthContext);
   const router = useRouter();
 
@@ -18,5 +18,5 @@ export default function Cart() {
     return null;
   }
 
-  return <CartPage />;
+  return <ProfilePage />;
 }

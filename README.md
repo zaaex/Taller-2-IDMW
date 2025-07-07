@@ -38,34 +38,28 @@ Para ejecutar este proyecto necesitas tener instaladas las siguientes herramient
 Sigue estos pasos para clonar el repositorio e instalar las dependencias del proyecto:
 
 ```bash
-# 1. Clona el repositorio
+## 1. Clona el repositorio
 git clone <https://github.com/zaaex/Taller-2-IDMW.git>
 
-# 2. Accede a la carpeta del proyecto
+## 2. Accede a la carpeta del proyecto
 cd FRONTEND
 
-# 3. Instala las dependencias
+## 3. Instala las dependencias
 npm install
 
----
-
-
-
----
-
-## 6. Ejecutar la Aplicación
+## 4. Ejecutar la Aplicación
 
 Para iniciar el entorno de desarrollo local:
 ```bash
 npm run dev
 
 ---
-## 7. Enlace al Prototipo en Figma
+## 5. Enlace al Prototipo en Figma
 https://www.figma.com/design/uqdnKKii28HKLOtTL2x18r/Taller2Web?node-id=0-1&t=Y6YSIeECewqBqPSY-1
 
-## 8. Backend
+## 6. Backend
 Esta aplicación requiere que la API del curso de comercio electrónico esté ejecutándose. Puede encontrar el repositorio de backend aquí:
 https://github.com/FernandoChav/AyudantiaWebMovil.git
 
-## 5. Crear el archivo .env en la raíz de FRONTEND con el siguiente contenido:
-NEXT_PUBLIC_API_URL = "http://localhost:3000/api"  # Reemplaza con la URL de tu API
+## 7. Crear el archivo .env en la raíz de FRONTEND con el siguiente contenido:
+NEXT_PUBLIC_API_URL = "http://localhost:5000"  # Reemplaza con la URL de tu API
