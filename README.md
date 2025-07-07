@@ -38,7 +38,7 @@ Sigue estos pasos para clonar el repositorio e instalar las dependencias del pro
 
 ````bash
 # 1. Clona el repositorio
-git clone <https://github.com/zaaex/Taller-2-IDMW.git>
+git clone https://github.com/zaaex/Taller-2-IDMW.git
 
 # 2. Accede a la carpeta del proyecto
 cd .\Taller-2-IDMW\
