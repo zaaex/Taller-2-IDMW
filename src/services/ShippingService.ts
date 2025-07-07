@@ -9,7 +9,7 @@ export const ShippingService = {
         return data.data;
       }
       return null;
-    } catch (error: any) {
+    } catch {
       return null;
     }
   },

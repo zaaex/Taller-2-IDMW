@@ -10,8 +10,8 @@ export const UserService = {
         return data.data as User;
       }
       return null;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+      
+    } catch {
       return null;
     }
   },
@@ -23,8 +23,7 @@ export const UserService = {
         return data.data;
       }
       return null;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+    } catch {
       return null;
     }
   },
