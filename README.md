@@ -1,16 +1,15 @@
-
 ## 1. Nombre del Proyecto
 
 **Plataforma E-Commerce BLACKCAT**
 
-Nathalia Olivarez  nathalia.olivarez@alumnos.ucn.cl   21.376.495-0
-Alexander Rivera   alexander.rivera01@alumnos.ucn.cl  21.354.394-6
+Nathalia Olivarez nathalia.olivarez@alumnos.ucn.cl 21.376.495-0
+Alexander Rivera alexander.rivera01@alumnos.ucn.cl 21.354.394-6
 
 ---
 
 ## 2. Descripción del Proyecto
 
-Este proyecto corresponde al desarrollo de una plataforma de comercio electrónico para la empresa ficticia BLACKCAT, como parte del taller de la asignatura *Introducción al Desarrollo Web/Móvil*, construida con **Next.js** y forma parte de una arquitectura cliente-servidor.
+Este proyecto corresponde al desarrollo de una plataforma de comercio electrónico para la empresa ficticia BLACKCAT, como parte del taller de la asignatura _Introducción al Desarrollo Web/Móvil_, construida con **Next.js** y forma parte de una arquitectura cliente-servidor.
 
 El cliente debe permitir a los usuarios:
 
@@ -37,12 +36,12 @@ Para ejecutar este proyecto necesitas tener instaladas las siguientes herramient
 
 Sigue estos pasos para clonar el repositorio e instalar las dependencias del proyecto:
 
-```bash
+````bash
 # 1. Clona el repositorio
-git clone <https://github.com/zaaex/Taller-2-IDMW.git>
+git clone https://github.com/zaaex/Taller-2-IDMW.git
 
 # 2. Accede a la carpeta del proyecto
-cd FRONTEND
+cd .\Taller-2-IDMW\
 
 # 3. Instala las dependencias
 npm install
@@ -50,7 +49,7 @@ npm install
 ---
 
 ## 5. Crear el archivo .env en la raíz de FRONTEND con el siguiente contenido:
-NEXT_PUBLIC_API_URL = "http://localhost:3000/api"  # Reemplaza con la URL de tu API
+NEXT_PUBLIC_API_URL = "http://localhost:5000"  # Reemplaza con la URL de tu API
 
 ---
 
@@ -66,4 +65,5 @@ https://www.figma.com/design/uqdnKKii28HKLOtTL2x18r/Taller2Web?node-id=0-1&t=Y6Y
 
 ## 8. Backend
 Esta aplicación requiere que la API del curso de comercio electrónico esté ejecutándose. Puede encontrar el repositorio de backend aquí:
-https://github.com/FernandoChav/AyudantiaWebMovil.git
+https://github.com/nathyxddd/Taller2_IDWM_Backend.git
+````

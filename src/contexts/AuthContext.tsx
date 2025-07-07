@@ -1,47 +1,75 @@
 "use client";
 
-import { User } from "@/interfaces/User";
+import { Auth } from "@/interfaces/Auth";
 import { authReducer, AuthState } from "./AuthReducer";
-import { createContext, useReducer } from "react";
+import { createContext, ReactNode, useEffect, useReducer } from "react";
+import { decodeJWT } from "@/helpers/decodeJWT";
 
 type AuthContextProps = {
-  user: User | null;
+  auth: Auth | null;
   status: "authenticated" | "non-authenticated" | "checking";
-  auth: (user: User) => void;
+  login: (auth: Auth) => void;
   logout: () => void;
-  updateUser: (user: User) => void;
 };
 
 const authInitialState: AuthState = {
   status: "checking",
-  user: null,
+  auth: null,
 };
 
 export const AuthContext = createContext({} as AuthContextProps);
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const AuthProvider = ({ children }: any) => {
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [state, dispatch] = useReducer(authReducer, authInitialState);
 
-  const auth = (user: User) => {
-    
-    dispatch({ type: "auth", payload: { user }});
-    
+  const login = (auth: Auth) => {
+    dispatch({ type: "auth", payload: { auth } });
   };
   const logout = () => {
     localStorage.removeItem("token");
     dispatch({ type: "logout" });
   };
-  const updateUser = (user: User) => {
-    dispatch({ type: "updateUser", payload: { user } });
-  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      logout();
+      return;
+    }
+
+    try {
+      const payload = decodeJWT(token);
+
+      if (!payload) {
+        logout();
+        return;
+      }
+
+      const auth: Auth = {
+        id: payload.nameid,
+        email: payload.email,
+        name: payload.given_name,
+        role: payload.role,
+      };
+
+      login(auth);
+    } catch (error) {
+      console.error("Error decoding token payload, logging out", error);
+      logout();
+    }
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         ...state,
         logout,
-        auth,
-        updateUser,
+        login,
       }}
     >
       {children}

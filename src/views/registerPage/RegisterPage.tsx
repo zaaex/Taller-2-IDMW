@@ -14,10 +14,10 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ApiBackend } from "@/clients/axios";
 import { toast } from "sonner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { AuthService } from "@/services/AuthServices";
 
 const formSchema = z
   .object({
@@ -117,7 +117,7 @@ export const RegisterPage = () => {
 
       console.log("Payload enviado al backend:", payload);
 
-      const { data } = await ApiBackend.post("Auth/register", payload);
+      const data = await AuthService.register(payload);
 
       if (data.success === false) {
         setServerError(data.message || "Error al registrar.");
